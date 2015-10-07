@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Madlibs</title>
+    <link rel="stylesheet" type="text/css" href="/static/madlibs.css">
+    
+</head>
+<body>
+    <h1> Congratulations!!!!!!</h1>
+    <p>There once was a {{ color }} {{ noun }} sitting in the Hackbright Lab. When {{ person }} went to pick it up, it burst into flames in a totally {{ adjective }} way.</p>
+    <br>
+    {%if pets %}
+      {{person}} loves {{pronoun}}
+      {% for pet in pets %}
+         {{pet}},
+      {% endfor %}
+    {% endif %}
+</body>
+</html>
