@@ -22,6 +22,9 @@ def say_hello():
 def greet_person():
     player = request.args.get("person")
     
+    postget = choice(['POST', 'GET'])
+    print "*********************************"
+    print postget
 
     AWESOMENESS = [
         'awesome', 'terrific', 'fantastic', 'neato', 'fantabulous', 'wowza', 'oh-so-not-meh',
@@ -29,19 +32,27 @@ def greet_person():
 
     compliment = choice(AWESOMENESS)
 
-    return render_template("compliment.html", person=player, compliment=compliment)
+    return render_template("compliment.html", person=player, compliment=compliment, postget=postget)
 
 
 
 
-@app.route('/game')
+@app.route('/game', methods=['POST', 'GET'])
 def show_game_form():
-    playgame =request.args.get("playgame")
-    if playgame == "yes":
-        game= choice(["game1.html", "game2.html"])
-        return render_template(game)
-    else:
-        return render_template("goodbye.html")
+    if request.method == 'POST':
+        playgame =request.form.get("playgame")
+        if playgame == "yes":
+            #game= choice(["game1.html", "game2.html"])
+            game = "game1.html"
+        else:
+            game = "goodbye.html"
+    elif request.method =='GET':
+        playgame = request.args.get("playgame")
+        if playgame == "yes":
+            game = "game2.html"
+        else:
+            game = "goodbye.html"
+    return render_template(game)
 
 @app.route('/madlib1')
 def show_madlib():
